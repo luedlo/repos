@@ -1,0 +1,71 @@
+﻿@model Systree.Models.Planta
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+@if (Session["UserName"] != null)
+{
+    <section class="py-3 col-md-12">
+
+        <article class="p-0 pt-3 col-md-12">
+            <h2><i class="fa fa-info-circle" aria-hidden="true"></i> Detalles</h2>
+            <hr />
+        </article>
+
+        <article class="col-md-12 p-0 border">
+            <article class="w-100" id="bannerplant">
+                <img src="~/resources/plantimage.jpg" alt="Planta" id="plantimage" />
+            </article>
+
+            <article class="row p-5">
+                <article class="col-md-3 pt-3">
+                    <a href="~/Plant/Edit/@Model.Id" class="btn btn-outline-success d-block mb-2">Editar Planta</a>
+                    <a href="~/Plant/Delete/@Model.Id" class="btn btn-outline-danger d-block mb-2">Borrar Planta</a>
+                    <a href="~/Plant/Index" class="btn btn-outline-info d-block">Volver al Glosario</a>
+                </article>
+
+                <article class="col-md-9 row">
+                    <dl class="lead col-md-6">
+                        <dt>@Html.DisplayNameFor(model => model.Id)</dt>
+                        <dd>@Html.DisplayFor(model => model.Id)</dd>
+
+                        <dt>@Html.DisplayNameFor(model => model.Tipo)</dt>
+                        <dd>@Html.DisplayFor(model => model.Tipo)</dd>
+
+                        <dt>@Html.DisplayNameFor(model => model.Nombre)</dt>
+                        <dd>@Html.DisplayFor(model => model.Nombre)</dd>
+
+                        <dt>@Html.DisplayNameFor(model => model.Longitud_promedio)</dt>
+                        <dd>@Html.DisplayFor(model => model.Longitud_promedio)</dd>
+
+                        <dt>@Html.DisplayNameFor(model => model.Riego)</dt>
+                        <dd>@Html.DisplayFor(model => model.Riego)</dd>
+                    </dl>
+
+                    <dl class="lead col-md-6">
+
+                        <dt>@Html.DisplayNameFor(model => model.Temporada)</dt>
+                        <dd>@Html.DisplayFor(model => model.Temporada)</dd>
+
+                        <dt>@Html.DisplayNameFor(model => model.Luz_exposicion)</dt>
+                        <dd>@Html.DisplayFor(model => model.Luz_exposicion)</dd>
+
+
+                        <dt>@Html.DisplayNameFor(model => model.Tipo_suelo)</dt>
+                        <dd>@Html.DisplayFor(model => model.Tipo_suelo)</dd>
+
+                        <dt>@Html.DisplayNameFor(model => model.Otros)</dt>
+                        <dd>@Html.DisplayFor(model => model.Otros)</dd>
+                    </dl>
+                </article>
+            </article>
+
+        </article>
+    </section>
+}
+
+else
+{
+    Response.Redirect("~/Home/Login");
+}

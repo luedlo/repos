@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    ViewBag.Username = Session["UserName"];
+
+
+}
+
+@if (Session["UserName"] != null)
+{
+    <section class="py-3 col-md-12">
+
+        <article class="py-3">
+            <h2><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</h2>
+            <hr />
+        </article>
+
+        <article>
+
+            Bienvenido <span class="font-weight-bold">@ViewBag.Username</span> ---!
+
+        </article>
+
+    </section>
+
+}
+
+else
+{
+    Response.Redirect("Login");
+}

@@ -1,0 +1,55 @@
+﻿@model Systree.Models.UserProfile
+
+@{
+    ViewBag.Title = "Borrar";
+}
+
+@if (Session["UserName"] != null)
+{
+    <section class="py-3 col-md-12">
+
+        <article class="py-3">
+            <h2><i class="fa fa-trash-o" aria-hidden="true"></i> Borrar Usuario</h2>
+            <hr />
+            <h3 class="lead">¿Está seguro que desea borrar el usuario?</h3>
+        </article>
+
+        <article>
+
+            <article class="col-md-9 row py-3">
+                <h5 class="w-100">Perfil del Usuario</h5>
+                <dl class="lead col-md-6">
+                    <dt>ID</dt>
+                    <dd>@Html.DisplayFor(model => model.UserId)</dd>
+
+                    <dt>Usuario</dt>
+                    <dd>@Html.DisplayFor(model => model.UserName)</dd>
+
+                </dl>
+                <dl class="lead col-md-6">
+                    <dt>Contraseña</dt>
+                    <dd>@Html.DisplayFor(model => model.Password)</dd>
+
+                    <dt>Activo</dt>
+                    <dd>@Html.DisplayFor(model => model.IsActive)</dd>
+                </dl>
+            </article>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <article class="form-actions no-color">
+                    <input type="submit" value="Borrar" class="btn btn-danger" />
+                    <a href="~/Profile/Details/@Session["UserId"]" class="btn btn-warning text-white">Cancelar</a>
+                </article>
+            }
+        </article>
+
+    </section>
+}
+
+else
+{
+    Response.Redirect("~/Home/Login");
+}

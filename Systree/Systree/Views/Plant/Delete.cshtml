@@ -1,0 +1,102 @@
+﻿@model Systree.Models.Planta
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+@if (Session["UserName"] != null)
+{
+    <section class="py-3 col-md-12">
+
+        <article class="py-3">
+            <h2><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Borrar</h2>
+            <hr />
+            <h3 class="lead">¿Está seguro que desea borrar la planta?</h3>
+        </article>
+
+        <article>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Tipo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Tipo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Nombre)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Longitud_promedio)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Longitud_promedio)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Temporada)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Temporada)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Luz_exposicion)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Luz_exposicion)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Riego)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Riego)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Tipo_suelo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Tipo_suelo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Otros)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Otros)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Borrar" class="btn btn-danger" />
+                    <a href="~/Plant/Details/@Model.Id" class="btn btn-warning text-white">Cancelar</a>
+                </div>
+            }
+        </article>
+
+    </section>
+}
+
+else
+{
+    Response.Redirect("~/Home/Login");
+}
