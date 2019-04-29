@@ -14,6 +14,11 @@ namespace Systree.Controllers
     {
         private systreeDBEntities1 db = new systreeDBEntities1();
 
+        public ActionResult Index()
+        {
+            return RedirectToAction("Login");
+        }
+
         public ActionResult Login()
         {
             return View();
@@ -25,7 +30,6 @@ namespace Systree.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (systreeDBEntities1 db = new systreeDBEntities1())
                 {
                     var obj = db.UserProfile.Where(a => a.UserName.Equals(objUser.UserName) && a.Password.Equals(objUser.Password)).FirstOrDefault();
                     if (obj != null)
@@ -36,7 +40,8 @@ namespace Systree.Controllers
                     }
                 }
             }
-            return View(objUser);
+            ViewBag.Message = "El usuario o contraseña son incorrectos!";
+            return View();
         }
 
         public ActionResult Dashboard()
@@ -59,8 +64,6 @@ namespace Systree.Controllers
 
         public ActionResult About()
         {
-            //ViewBag.Message = "Your application description page.";
-
             return View();
         }
 

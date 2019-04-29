@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Tips";
+}
+
+<body onload="tip()"></body>
+
+@if (Session["UserName"] != null)
+{
+    <section class="py-3 col-md-12">
+
+        <article class="py-3">
+            <h2><i class="fa fa-magic" aria-hidden="true"></i> Consejos</h2>
+            <hr />
+            <span class="lead pb-3">Consejos para el Cuidado de Plantas</span>
+        </article>
+
+        <article class="col-md-12 p-0">
+            <table class="table table-striped" id="tipsTable">
+                <tr>
+                    <th>#</th>
+                    <th>Descripción</th>
+                </tr>
+            </table>
+        </article>
+    </section>
+}
+
+else
+{
+    Response.Redirect("~/Home/Login");
+}

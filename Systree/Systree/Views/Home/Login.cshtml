@@ -4,46 +4,51 @@
     ViewBag.Title = "Iniciar Sesión";
 }
 
+
+<body onload="suggestATip()">
+</body>
+
 @if (Session["UserName"] == null)
 {
-    <section class="py-3 col-md-12">
+    <section class="py-3 col-md-12" id="Login">
 
         @using (Html.BeginForm("Login", "Home", FormMethod.Post))
         {
-        <article class="py-3">
-            <h2><i class="fa fa-sign-in" aria-hidden="true"></i> Iniciar Sesión</h2>
-            <hr />
-            <span class="lead">Sistema de monitoreo, control y prevención de áreas verdes.</span>
-        </article>
+            <article class="py-3">
+                <h2><i class="fa fa-sign-in" aria-hidden="true"></i> Iniciar Sesión</h2>
+                <hr />
+                <span class="lead">Sistema de monitoreo, control y prevención de áreas verdes.</span>
+            </article>
 
-        <article class="py-3">
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true)
-            @if (@ViewBag.Message != null)
+            <article class="py-3">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <table>
+                    <tr>
+                        <td>Usuario: </td>
+                        <td>@Html.TextBoxFor(a => a.UserName, new { @class = "form-control" })</td>
+                        <td>@Html.ValidationMessageFor(a => a.UserName)</td>
+                    </tr>
+                    <tr><td>&emsp;</td></tr>
+                    <tr>
+                        <td>Contraseña:&emsp;</td>
+                        <td>@Html.PasswordFor(a => a.Password, new { @class = "form-control" })</td>
+                        <td>@Html.ValidationMessageFor(a => a.Password)</td>
+                    </tr>
+                    <tr><td>&emsp;</td></tr>
+                    <tr>
+                        <td></td>
+                        <td><input class="btn btn-block btn-primary" type="submit" value="LogIn" /></td>
+                    </tr>
+                </table>
+            </article>
+            if (@ViewBag.Message != null)
             {
-                <div style="border: 1px solid red">
-                    @ViewBag.Message
+                <div class="alert alert-danger alert-dismissible fade show" id="alert">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <span>@ViewBag.Message</span>
                 </div>
             }
-            <table>
-                <tr>
-                    <td>Usuario: </td>
-                    <td>@Html.TextBoxFor(a => a.UserName, new { @class = "form-control" })</td>
-                    <td>@Html.ValidationMessageFor(a => a.UserName)</td>
-                </tr>
-                <tr><td>&emsp;</td></tr>
-                <tr>
-                    <td>Contraseña:&emsp;</td>
-                    <td>@Html.PasswordFor(a => a.Password, new { @class = "form-control" })</td>
-                    <td>@Html.ValidationMessageFor(a => a.Password)</td>
-                </tr>
-                <tr><td>&emsp;</td></tr>
-                <tr>
-                    <td></td>
-                    <td><input class="btn btn-block btn-primary" type="submit" value="LogIn" /></td>
-                </tr>
-            </table>
-        </article>
         }
 
     </section>
@@ -53,3 +58,22 @@ else
 {
     Response.Redirect("Dashboard");
 }
+
+
+<!-- The Modal -->
+<section class="modal fade mt-5" id="myModal">
+    <article class="modal-dialog modal-dialog-scrollable">
+        <article class="modal-content">
+
+            <article class="modal-header bg-info py-2">
+                <h3 class="modal-title text-white">Tip</h3>
+                <input type="button" class="close p-4 bg-transparent border-0 " data-dismiss="modal" value="&#9932;">
+            </article>
+
+            <article class="modal-body">
+                <h3 class="lead" id="tipText"></h3>
+            </article>
+
+        </article>
+    </article>
+</section>

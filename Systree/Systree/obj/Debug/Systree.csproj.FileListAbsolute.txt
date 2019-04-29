@@ -78,3 +78,5 @@ C:\Users\LELV\source\repos\Systree\Systree\obj\Debug\Systree.csproj.CopyComplete
 C:\Users\LELV\source\repos\Systree\Systree\obj\Debug\Systree.dll
 C:\Users\LELV\source\repos\Systree\Systree\obj\Debug\Systree.pdb
 C:\Users\LELV\source\repos\Systree\Systree\obj\Debug\Systree.csprojAssemblyReference.cache
+C:\Users\LELV\source\repos\Systree\Systree\bin\MvcBreadCrumbs.dll
+C:\Users\LELV\source\repos\Systree\Systree\bin\MvcBreadCrumbs.pdb

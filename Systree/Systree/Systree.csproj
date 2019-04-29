@@ -54,6 +54,9 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcBreadCrumbs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcBreadCrumbs.0.69\lib\MvcBreadCrumbs.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -227,6 +230,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Style\JavaScript.js" />
     <Content Include="Style\StyleSheet1.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -259,6 +263,7 @@
     <Content Include="Views\Plant\Details.cshtml" />
     <Content Include="Views\Plant\Edit.cshtml" />
     <Content Include="Views\Plant\Index.cshtml" />
+    <Content Include="Views\Plant\Tips.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

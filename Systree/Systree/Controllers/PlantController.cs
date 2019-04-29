@@ -14,6 +14,11 @@ namespace Systree.Controllers
     {
         private systreeDBEntities1 db = new systreeDBEntities1();
 
+        public ActionResult Tips()
+        {
+            return View();
+        }
+
         // GET: Plant
         public ActionResult Index()
         {

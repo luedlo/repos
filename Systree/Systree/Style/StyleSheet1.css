@@ -124,3 +124,13 @@
     border: 5px solid #66FF66;
     box-shadow: 0px 0px 1px 1px black;
 }
+
+
+/** Alerts **/
+#alert {
+    position: fixed;
+    left: 50%;
+    bottom: 50px;
+    transform: translate(-50%, 0);
+    transition: ease-in-out 0.3s;
+}
