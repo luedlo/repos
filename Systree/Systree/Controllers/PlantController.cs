@@ -30,7 +30,7 @@ namespace Systree.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.Redirect);
             }
             Planta planta = db.Planta.Find(id);
             if (planta == null)
