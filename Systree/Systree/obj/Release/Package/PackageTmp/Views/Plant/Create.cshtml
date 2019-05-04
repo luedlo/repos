@@ -1,0 +1,104 @@
+﻿@model Systree.Models.Planta
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@if (Session["UserName"] != null)
+{
+    <section class="py-3 col-md-12">
+
+        <article class="py-3">
+            <h2><i class="fa fa-plus-circle" aria-hidden="true"></i> Añadir</h2>
+            <hr />
+            <span class="lead">Añadir una Nueva Planta</span>
+        </article>
+
+        <article class="col-md-12 p-0">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <article class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <article class="form-group">
+                        @Html.LabelFor(model => model.Tipo, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <article class="col-md-10">
+                            @Html.EditorFor(model => model.Tipo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+                        </article>
+                    </article>
+
+                    <article class="form-group">
+                        @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <article class="col-md-10">
+                            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                        </article>
+                    </article>
+
+                    <article class="form-group">
+                        @Html.LabelFor(model => model.Longitud_promedio, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <article class="col-md-10">
+                            @Html.EditorFor(model => model.Longitud_promedio, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Longitud_promedio, "", new { @class = "text-danger" })
+                        </article>
+                    </article>
+
+                    <article class="form-group">
+                        @Html.LabelFor(model => model.Temporada, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <article class="col-md-10">
+                            @Html.EditorFor(model => model.Temporada, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Temporada, "", new { @class = "text-danger" })
+                        </article>
+                    </article>
+
+                    <article class="form-group">
+                        @Html.LabelFor(model => model.Luz_exposicion, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <article class="col-md-10">
+                            @Html.EditorFor(model => model.Luz_exposicion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Luz_exposicion, "", new { @class = "text-danger" })
+                        </article>
+                    </article>
+
+                    <article class="form-group">
+                        @Html.LabelFor(model => model.Riego, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <article class="col-md-10">
+                            @Html.EditorFor(model => model.Riego, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Riego, "", new { @class = "text-danger" })
+                        </article>
+                    </article>
+
+                    <article class="form-group">
+                        @Html.LabelFor(model => model.Tipo_suelo, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <article class="col-md-10">
+                            @Html.EditorFor(model => model.Tipo_suelo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Tipo_suelo, "", new { @class = "text-danger" })
+                        </article>
+                    </article>
+
+                    <article class="form-group">
+                        @Html.LabelFor(model => model.Otros, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <article class="col-md-10">
+                            @Html.EditorFor(model => model.Otros, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Otros, "", new { @class = "text-danger" })
+                        </article>
+                    </article>
+
+                    <article class="form-group">
+                        <article class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-success" />
+                            @Html.ActionLink("Cancelar", "Index", "Plant", new { }, new { @class = "btn btn-warning text-light" })
+                        </article>
+                    </article>
+                </article>
+            }
+        </article>
+
+    </section>
+}
+
+else
+{
+    Response.Redirect("~/Home/Login");
+}

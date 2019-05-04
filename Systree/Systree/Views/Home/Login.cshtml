@@ -10,7 +10,7 @@
 
 @if (Session["UserName"] == null)
 {
-    <section class="py-3 col-md-12" id="Login">
+    <section class="container py-3" id="Login">
 
         @using (Html.BeginForm("Login", "Home", FormMethod.Post))
         {

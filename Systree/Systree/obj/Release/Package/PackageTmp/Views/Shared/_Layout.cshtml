@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - SysTree</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="icon" href="~/resources/logo.png" />
+    <link href="~/Style/StyleSheet1.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" media="screen" runat="server">
+</head>
+<body>
+
+    @{ 
+        Array breadcrumbPath = HttpContext.Current.Request.Url.AbsolutePath.Split('/');
+        ViewBag.route = breadcrumbPath;
+
+        string relativePath (int currentPath)
+        {
+            string route = "";
+            for (int i=1; i<=currentPath; i++)
+                route += "/" + breadcrumbPath.GetValue(i);
+
+            return route;
+        }
+    }
+
+    <!-- ***************************************************************************************** -->
+    <!-- ********************************** Menu ************************************************* -->
+    <!-- ***************************************************************************************** -->
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark px-5" id="navbar">
+        <a class="navbar-brand logohover pl-md-5" href="~/Home/Dashboard">
+            <img src="~/resources/Logo.png" class="align-top logo" alt="Logo">
+            &ensp;SysTree
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse text-center pr-md-5" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                @if (Session["UserName"] != null)
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink("Inicio", "Dashboard", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Plantas
+                        </a>
+                        <div class="dropdown-menu bg-dark text-dark pl-3" aria-labelledby="navbarDropdownMenuLink" id="subMenu">
+                            @Html.ActionLink("Glosario", "Index", "Plant", new { area = "" }, new { @class = "nav-link" })
+                            @Html.ActionLink("Consejos", "Tips", "Plant", new { area = "" }, new { @class = "nav-link" })
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Acerca de", "About", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle border rounded" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user"></i> @Session["UserName"]
+                        </a>
+                        <div class="dropdown-menu bg-dark text-dark pl-3" aria-labelledby="navbarDropdownMenuLink" id="subMenu">
+                            <a href="~/Profile/Details/@Session["UserId"]" class="nav-link">Mi Perfil</a>
+                            @Html.ActionLink("Cerrar Sesión", "Logout", "Home", new { area = "" }, new { @class = "nav-link" })
+                        </div>
+                    </li>
+                }
+
+                else
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink("Acerca de", "About", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="navbar-item">
+                        @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+
+
+    <section class="container body-content">
+        <ol class="breadcrumb mb-0">
+            @for (int i = 1; i < ViewBag.route.Length; i++)
+            {
+                string route = relativePath(i);
+                <li class="breadcrumb-item"><a href="@route">@ViewBag.route[i]</a></li>
+            }
+        </ol>
+        @RenderBody()
+    </section>
+
+
+    <hr />
+    <footer class="p-4 text-center">
+        <span class="lead">SysTree - &copy; @DateTime.Now.Year</span>
+    </footer>
+
+    <script src="~/Style/JavaScript.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

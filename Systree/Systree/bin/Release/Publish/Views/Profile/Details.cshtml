@@ -1,0 +1,54 @@
+﻿@model Systree.Models.UserProfile
+
+@{
+    ViewBag.Title = "Perfil";
+}
+
+@if (Session["UserName"] != null)
+{
+    <section class="py-3 col-md-12">
+
+        <article class="p-0 pt-3 col-md-12">
+            <h2><i class="fa fa-user" aria-hidden="true"></i> Perfil de Usuario</h2>
+            <hr />
+        </article>
+
+        <article class="col-md-12 p-0 border">
+            <article class="w-100" id="bannerprofile">
+                <img src="~/resources/userimage.png" alt="Usuario" id="profileimage" />
+            </article>
+
+            <article class="row p-5">
+                <article class="col-md-3 pt-3">
+                    <a href="~/Profile/Edit/@Session["UserId"]" class="btn btn-outline-success d-block mb-2">Editar Perfil</a>
+                    <a href="~/Profile/Delete/@Session["UserId"]" class="btn btn-outline-danger d-block">Darme de Baja</a>
+                </article>
+
+                <article class="col-md-9 row">
+                    <dl class="lead col-md-6">
+                        <dt>ID</dt>
+                        <dd>@Html.DisplayFor(model => model.UserId)</dd>
+
+                        <dt>Usuario</dt>
+                        <dd>@Html.DisplayFor(model => model.UserName)</dd>
+
+                    </dl>
+                    <dl class="lead col-md-6">
+                        <dt>Contraseña</dt>
+                        <dd>@Html.DisplayFor(model => model.Password)</dd>
+
+                        <dt>Activo</dt>
+                        <dd>@Html.DisplayFor(model => model.IsActive)</dd>
+                    </dl>
+                </article>
+            </article>
+
+        </article>
+
+    </section>
+}
+
+else
+{
+    Response.Redirect("~/Home/Login");
+}

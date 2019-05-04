@@ -12,14 +12,14 @@
 </head>
 <body>
 
-    @{ 
+    @{
         Array breadcrumbPath = HttpContext.Current.Request.Url.AbsolutePath.Split('/');
         ViewBag.route = breadcrumbPath;
 
-        string relativePath (int currentPath)
+        string relativePath(int currentPath)
         {
             string route = "";
-            for (int i=1; i<=currentPath; i++)
+            for (int i = 1; i <= currentPath; i++)
                 route += "/" + breadcrumbPath.GetValue(i);
 
             return route;
@@ -44,7 +44,7 @@
                 @if (Session["UserName"] != null)
                 {
                     <li class="nav-item">
-                        @Html.ActionLink("Inicio", "Dashboard", "Home", new { area = "" }, new { @class = "nav-link" })
+                        @Html.ActionLink("Tablero", "Dashboard", "Home", new { area = "" }, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -75,7 +75,7 @@
                         @Html.ActionLink("Acerca de", "About", "Home", new { area = "" }, new { @class = "nav-link" })
                     </li>
                     <li class="navbar-item">
-                        @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link" })
+                        @Html.ActionLink("Iniciar Sesión", "Login", "Home", new { area = "" }, new { @class = "nav-link" })
                     </li>
                 }
             </ul>
@@ -84,14 +84,18 @@
 
 
     <section class="container body-content">
-        <ol class="breadcrumb mb-0">
-            @for (int i = 1; i < ViewBag.route.Length; i++)
-            {
-                string route = relativePath(i);
-                <li class="breadcrumb-item"><a href="@route">@ViewBag.route[i]</a></li>
-            }
-        </ol>
-        @RenderBody()
+        <article>
+            <ol class="breadcrumb mb-0">
+                @for (int i = 1; i < ViewBag.route.Length; i++)
+                {
+                    string route = relativePath(i);
+                    <li class="breadcrumb-item"><a>@ViewBag.route[i]</a></li>
+                }
+            </ol>
+        </article>
+        <article style="margin-top: -20px;">
+            @RenderBody()
+        </article>
     </section>
 
 
@@ -100,7 +104,59 @@
         <span class="lead">SysTree - &copy; @DateTime.Now.Year</span>
     </footer>
 
+
+    <div class="se-pre-con">
+        <div class="spinner-grow text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow bg-secondary mb-3" role="status">
+        </div>
+        <div class="spinner-grow text-danger" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="mx-auto" role="status">
+            <img src="~/resources/logo.png" class="spinner-grow bg-transparent text-light" />
+            <span class="align-top lead font-weight-normal">SysTree</span>
+            <img src="~/resources/logo.png" class="spinner-grow bg-transparent" />
+        </div>
+        <div class="spinner-grow text-success mb-3" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-warning mt-3" role="status">
+        </div>
+        <div class="spinner-grow text-dark mb-3" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <style>
+        /** Loader **/
+        .se-pre-con {
+            top: 50%;
+            left: 50%;
+            position: fixed;
+            text-align: center;
+            border-radius: 50%;
+            border: 1px solid purple;
+            transform: translate(-50%, -50%);
+            background: url(images/loader-64x/Preloader_2.gif) center no-repeat #fff;
+        }
+    </style>
+
     <script src="~/Style/JavaScript.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+
+    <script>
+        /** Loader **/
+        // Wait for window load
+        $(window).load(function () {
+            // Animate loader off screen
+            $(".se-pre-con").fadeOut("slow");
+        });
+    </script>
+
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

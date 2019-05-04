@@ -54,3 +54,5 @@ function tip() {
         tipsTable.innerHTML += htmlRow;
     }
 }
+
+/** Location **/

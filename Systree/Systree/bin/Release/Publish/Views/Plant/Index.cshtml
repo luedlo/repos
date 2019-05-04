@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Systree.Models.Planta>
+
+@{
+    ViewBag.Title = "Glosario";
+}
+
+@if (Session["UserName"] != null)
+{
+    <section class="py-3 col-md-12">
+
+        <article class="py-3">
+            <h2><i class="fa fa-list" aria-hidden="true"></i> Glosario</h2>
+            <hr />
+            <span class="lead pb-3">Glosario de Plantas</span>
+            @Html.ActionLink("Añadir Planta", "Create", "Plant", new { }, new { @class = "float-right" })
+        </article>
+
+        <article class="col-md-12 p-0">
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Tipo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Longitud_promedio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Temporada)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Luz_exposicion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Riego)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Tipo_suelo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Otros)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tipo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Longitud_promedio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Temporada)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Luz_exposicion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Riego)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tipo_suelo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Otros)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Detalles", "Details", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </article>
+    </section>
+}
+
+else
+{
+    Response.Redirect("~/Home/Login");
+}

@@ -67,6 +67,11 @@ namespace Systree.Controllers
             return View();
         }
 
+        public ActionResult Design()
+        {
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

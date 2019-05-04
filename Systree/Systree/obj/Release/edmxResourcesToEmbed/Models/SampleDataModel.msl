@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="systreeDBModelStoreContainer" CdmEntityContainer="systreeDBEntities1">
+    <EntitySetMapping Name="Planta">
+      <EntityTypeMapping TypeName="systreeDBModel.Planta">
+        <MappingFragment StoreEntitySet="Planta">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Longitud_promedio" ColumnName="Longitud_promedio" />
+          <ScalarProperty Name="Temporada" ColumnName="Temporada" />
+          <ScalarProperty Name="Luz_exposicion" ColumnName="Luz_exposicion" />
+          <ScalarProperty Name="Riego" ColumnName="Riego" />
+          <ScalarProperty Name="Tipo_suelo" ColumnName="Tipo_suelo" />
+          <ScalarProperty Name="Otros" ColumnName="Otros" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserProfile">
+      <EntityTypeMapping TypeName="systreeDBModel.UserProfile">
+        <MappingFragment StoreEntitySet="UserProfile">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "Diseñador";
+    ViewBag.Lat = 0;
+    ViewBag.Lon = 0;
+}
+
+
+@if (Session["UserName"] != null)
+{
+    <section class="container py-3">
+
+        <article class="py-3">
+            <h2 class=" d-inline-block"><i class="fa fa-tree" aria-hidden="true"></i> Diseñador</h2>
+            <hr />
+        </article>
+
+        <article id="pos">
+            <a onclick="getCurrentLocation()" class="btn btn-outline-info">
+                <i class="fa fa-map-marker" aria-hidden="true"></i> Definir Ubicación
+            </a>
+            <input id="lat" hidden />
+            <input id="lon" hidden />
+
+        </article>
+
+    </section>
+}
+
+else
+{
+    Response.Redirect("Login");
+}
+
+<!-- Load Leaflet from CDN -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+      integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+      crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+        integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+        crossorigin=""></script>
+<!-- Load Esri Leaflet from CDN -->
+<script src="https://unpkg.com/esri-leaflet@2.2.4/dist/esri-leaflet.js"
+        integrity="sha512-tyPum7h2h36X52O2gz+Pe8z/3l+Y9S1yEUscbVs5r5aEY5dFmP1WWRY/WLLElnFHa+k1JBQZSCDGwEAnm2IxAQ=="
+        crossorigin=""></script>
+
+<style>
+    body { margin:0; padding:0; }
+    /** Location **/
+    #map {
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        display: none;
+        position: fixed;
+    }
+</style>
+
+<div id="map" class="h-100 mx-0"></div>
+
+<script>
+    /** Location **/
+    function getCurrentLocation() {
+        locations();
+    }
+
+    function locations() {
+		if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+		}
+	}
+
+    function showPosition(position) {
+        document.getElementById("map").style.display = "block";
+        /** LeafLet **/
+        var lat = position.coords.latitude;
+        var lon = position.coords.longitude;
+        var map = L.map('map').setView([lat, lon], 18);
+
+        L.esri.basemapLayer('Imagery').addTo(map);
+        L.esri.basemapLayer('ImageryLabels').addTo(map);
+        L.circle([lat, lon], {
+		    color: 'indigo',
+		    fillColor: 'blue',
+		    fillOpacity: 0.3,
+		    radius: 40
+		}).addTo(map);
+
+        var greenIcon = L.icon({
+            iconUrl: '/resources/leaf-green.png',
+            shadowUrl: '/resources/leaf-shadow.png',
+            iconSize: [38, 70], // size of the icon
+            shadowSize: [50, 64], // size of the shadow
+            iconAnchor: [22, 70], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62],  // the same for the shadow
+            popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+
+        L.marker([lat, lon], { icon: greenIcon }).addTo(map).bindPopup("<b style='color:green;'>Punto Marcado</b><br />Descripcion!");
+    }
+
+	function showError(error) {
+		var message = "";
+		switch (error.code) {
+			case error.PERMISSION_DENIED:
+				message = "The user is not authorized!"
+				break;
+			case error.POSITION_UNAVAILABLE:
+				message = "The information is unavailable!"
+				break;
+			case error.TIMEOUT:
+				message = "...!"
+				break;
+			case error.UNKNOWN_ERROR:
+				mensaje="Unknown error!";
+				break;
+		}
+	}
+
+</script>

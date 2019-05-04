@@ -1,0 +1,136 @@
+﻿/****************** LELV ******************/
+* {
+    font-size: 16px;
+    list-style: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+/** Navbar **/
+.nav-link {
+    color: white !important; 
+}
+
+#navbar {
+    background: #006666;
+}
+
+#navbarNavDropdown {
+    float: right;
+    justify-content: flex-end;
+}
+
+#subMenu {
+}
+
+::selection {
+    color: white;
+    background: #66FF66;
+}
+
+
+/** Layout **/
+.logo {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: white;
+    transition: ease-in-out 0.3s;
+}
+
+.logohover:hover .logo {
+    border-radius: 5px;
+}
+
+
+/** About **/
+#about .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+    vertical-align: top;
+    margin: auto;
+}
+
+#about .title {
+    color: grey;
+    font-size: 18px;
+}
+
+#about button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+#about a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+}
+
+#about button:hover, a:hover {
+    opacity: 0.7;
+}
+
+
+/** Profile **/
+#bannerprofile {
+    height: 150px;
+    background: #66FF66;
+    background-position: top;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-image: url(../resources/profilebanner.jpg);
+}
+
+#profileimage {
+    top: 80px;
+    left: 100px;
+    width: 120px;
+    height: 120px;
+    position: relative;
+    border-radius: 50%;
+    border: 5px solid #009999;
+    box-shadow: 0px 0px 1px 1px black;
+}
+
+
+/** Plant **/
+#bannerplant {
+    height: 150px;
+    background: #66FF66;
+    background-position: top;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-image: url(../resources/plantbanner.jpg);
+}
+
+#plantimage {
+    top: 80px;
+    left: 100px;
+    width: 120px;
+    height: 120px;
+    position: relative;
+    border-radius: 50%;
+    border: 5px solid #66FF66;
+    box-shadow: 0px 0px 1px 1px black;
+}
+
+
+/** Alerts **/
+#alert {
+    position: fixed;
+    left: 50%;
+    bottom: 50px;
+    transform: translate(-50%, 0);
+    transition: ease-in-out 0.3s;
+}

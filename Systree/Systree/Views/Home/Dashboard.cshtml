@@ -1,23 +1,23 @@
 ﻿@{
     ViewBag.Title = "Dashboard";
     ViewBag.Username = Session["UserName"];
-
-
 }
 
 @if (Session["UserName"] != null)
 {
-    <section class="py-3 col-md-12">
+    <section class="container py-3">
 
         <article class="py-3">
-            <h2><i class="fa fa-tachometer" aria-hidden="true"></i> Tablero</h2>
+            <span class="float-right border rounded bg-info text-white p-1">
+                Bienvenido <span class="font-weight-bold">@ViewBag.Username</span>!
+            </span>
+            <h2 class=" d-inline-block"><i class="fa fa-tachometer" aria-hidden="true"></i> Tablero</h2>
             <hr />
         </article>
-
         <article>
-
-            Bienvenido <span class="font-weight-bold">@ViewBag.Username</span>!
-
+            <a href="~/Home/Design" class="btn btn-outline-info">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i> Nueva área
+            </a>
         </article>
 
     </section>
