@@ -16,11 +16,22 @@
         </article>
 
         <article id="pos">
-            <a onclick="getCurrentLocation()" class="btn btn-outline-info">
-                <i class="fa fa-map-marker" aria-hidden="true"></i> Definir Ubicación
+            <a onclick="showLocation()" class="btn btn-outline-info float-right">
+                <i class="fa fa-map-marker" aria-hidden="true"></i> Ver Ubicación
             </a>
-            <input id="lat" hidden />
-            <input id="lon" hidden />
+
+
+            <form>
+                <div class="form-group">
+                    <label class="lead">Nombre del Área:</label>
+                    <input type="text" class="form-control" placeholder="Nombre" id="title">
+                </div>
+                <div class="form-group">
+                    <label class="lead">Descripción del Área:</label>
+                    <textarea class="form-control" placeholder="Descripción" rows="3" id="desc"></textarea>
+                </div>
+            </form>
+
 
         </article>
 
@@ -44,50 +55,91 @@ else
         integrity="sha512-tyPum7h2h36X52O2gz+Pe8z/3l+Y9S1yEUscbVs5r5aEY5dFmP1WWRY/WLLElnFHa+k1JBQZSCDGwEAnm2IxAQ=="
         crossorigin=""></script>
 
+<section id="map">
+    <a onclick="getCurrentLocation()" class="btn btn-info text-light" id="locationBtn">
+        <i class="fa fa-map-pin text-dark" aria-hidden="true"></i> Definir Ubicación
+    </a>
+    <a onclick="quitMark()" class="btn btn-info text-light" id="deleteBtn">
+        <i class="fa fa-times text-dark" aria-hidden="true"></i> Quitar Ubicación
+    </a>
+    <a onclick="closeMap()" class="btn btn-info text-light" id="closeBtn">
+        <i class="fa fa-window-close-o" aria-hidden="true"></i> Cerrar
+    </a>
+</section>
+
 <style>
-    body { margin:0; padding:0; }
+    body {
+        margin: 0;
+        padding: 0;
+    }
     /** Location **/
     #map {
         top: 0px;
         left: 0px;
         right: 0px;
         bottom: 0px;
-        display: none;
+        width: 100% !important;
+        height: 100%;
+        position: fixed;
+        z-index: 1 !important;
+    }
+
+    #locationBtn {
+        right: 10px;
+        top: 20px;
+        cursor: pointer;
+        z-index: 1000;
+        position: fixed;
+    }
+
+    
+    #deleteBtn {
+        right: 10px;
+        top: 60px;
+        cursor: pointer;
+        z-index: 1000;
+        position: fixed;
+    }
+    
+    #closeBtn {
+        right: 10px;
+        top: 100px;
+        cursor: pointer;
+        z-index: 1000;
         position: fixed;
     }
 </style>
 
-<div id="map" class="h-100 mx-0"></div>
 
 <script>
+    /** LeafLet **/
+    var map, lat, lon, greenIcon;
+    document.getElementById("map").style.display = "none";
+    document.getElementById("deleteBtn").style.display = "none";
+    
     /** Location **/
-    function getCurrentLocation() {
+    function showLocation() {
         locations();
     }
 
-    function locations() {
-		if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition, showError);
-		}
-	}
+    function quitMark() {
+        document.getElementById("deleteBtn").style.display = "none";
+        document.getElementById("locationBtn").style.display = "block";
+        map.remove();
+        document.getElementById("map").style.display = "none";
+        createMap();
+    }
 
-    function showPosition(position) {
-        document.getElementById("map").style.display = "block";
-        /** LeafLet **/
-        var lat = position.coords.latitude;
-        var lon = position.coords.longitude;
-        var map = L.map('map').setView([lat, lon], 18);
+    function closeMap() {
+        document.getElementById("map").style.display = "none";
+    }
 
-        L.esri.basemapLayer('Imagery').addTo(map);
-        L.esri.basemapLayer('ImageryLabels').addTo(map);
-        L.circle([lat, lon], {
-		    color: 'indigo',
-		    fillColor: 'blue',
-		    fillOpacity: 0.3,
-		    radius: 40
-		}).addTo(map);
-
-        var greenIcon = L.icon({
+    function getCurrentLocation() {
+        var title = document.getElementById("title").value;
+        var desc = document.getElementById("desc").value;
+        document.getElementById("locationBtn").style.display = "none";
+        document.getElementById("deleteBtn").style.display = "block";
+        greenIcon = L.icon({
             iconUrl: '/resources/leaf-green.png',
             shadowUrl: '/resources/leaf-shadow.png',
             iconSize: [38, 70], // size of the icon
@@ -97,25 +149,51 @@ else
             popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
         });
 
-        L.marker([lat, lon], { icon: greenIcon }).addTo(map).bindPopup("<b style='color:green;'>Punto Marcado</b><br />Descripcion!");
+        L.marker([lat, lon], { icon: greenIcon }).addTo(map).bindPopup("<b style='color:green;'>" + title + "</b><br />" + desc);
     }
 
-	function showError(error) {
-		var message = "";
-		switch (error.code) {
-			case error.PERMISSION_DENIED:
-				message = "The user is not authorized!"
-				break;
-			case error.POSITION_UNAVAILABLE:
-				message = "The information is unavailable!"
-				break;
-			case error.TIMEOUT:
-				message = "...!"
-				break;
-			case error.UNKNOWN_ERROR:
-				mensaje="Unknown error!";
-				break;
-		}
-	}
+    function createMap() {
+        document.getElementById("map").style.display = "block";
+        map = L.map('map').setView([lat, lon], 18);
+        L.esri.basemapLayer('Imagery').addTo(map);
+        L.esri.basemapLayer('ImageryLabels').addTo(map);
+
+        L.circle([lat, lon], {
+            color: 'indigo',
+            fillColor: 'blue',
+            fillOpacity: 0.3,
+            radius: 40
+        }).addTo(map);
+    }
+
+    function showPosition(position) {
+        lat = position.coords.latitude;
+        lon = position.coords.longitude;
+        createMap();
+    }
+
+    function locations() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        }
+    }
+
+    function showError(error) {
+        var message = "";
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                message = "The user is not authorized!"
+                break;
+            case error.POSITION_UNAVAILABLE:
+                message = "The information is unavailable!"
+                break;
+            case error.TIMEOUT:
+                message = "...!"
+                break;
+            case error.UNKNOWN_ERROR:
+                mensaje = "Unknown error!";
+                break;
+        }
+    }
 
 </script>
