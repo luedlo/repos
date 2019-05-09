@@ -21,7 +21,6 @@
     <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserName" Type="varchar" MaxLength="50" />
     <Property Name="Password" Type="varchar" MaxLength="50" />
-    <Property Name="IsActive" Type="bit" />
   </EntityType>
   <EntityContainer Name="systreeDBModelStoreContainer">
     <EntitySet Name="Planta" EntityType="Self.Planta" Schema="dbo" store:Type="Tables" />

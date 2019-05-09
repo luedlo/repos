@@ -21,7 +21,6 @@
     <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="IsActive" Type="Boolean" />
   </EntityType>
   <EntityContainer Name="systreeDBEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Planta" EntityType="Self.Planta" />

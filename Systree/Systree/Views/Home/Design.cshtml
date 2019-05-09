@@ -21,14 +21,28 @@
             </a>
 
 
-            <form>
-                <div class="form-group">
-                    <label class="lead">Nombre del Área:</label>
-                    <input type="text" class="form-control" placeholder="Nombre" id="title">
+            <form class="row">
+                <div class="container col-md-4">
+                    <div class="form-group">
+                        <label class="lead">Latitud:</label>
+                        <input type="text" class="form-control" placeholder="Latitud" id="latitude" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="lead">Longitud:</label>
+                        <input type="text" class="form-control" placeholder="Longitud" id="longitude" disabled>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="lead">Descripción del Área:</label>
-                    <textarea class="form-control" placeholder="Descripción" rows="3" id="desc"></textarea>
+
+                <div class="container col-md-8">
+                    <div class="form-group">
+                        <label class="lead">Nombre del Área:</label>
+                        <input type="text" class="form-control" placeholder="Nombre" id="title">
+                    </div>
+                    <div class="form-group">
+                        <label class="lead">Descripción del Área:</label>
+                        <textarea class="form-control" placeholder="Descripción" rows="3" id="desc"></textarea>
+                    </div>
                 </div>
             </form>
 
@@ -126,8 +140,10 @@ else
         document.getElementById("deleteBtn").style.display = "none";
         document.getElementById("locationBtn").style.display = "block";
         map.remove();
+        document.getElementById("latitude").setAttribute("value", "");
+        document.getElementById("longitude").setAttribute("value", "");
         document.getElementById("map").style.display = "none";
-        createMap();
+        locations();
     }
 
     function closeMap() {
@@ -148,8 +164,9 @@ else
             shadowAnchor: [4, 62],  // the same for the shadow
             popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
         });
-
         L.marker([lat, lon], { icon: greenIcon }).addTo(map).bindPopup("<b style='color:green;'>" + title + "</b><br />" + desc);
+        document.getElementById("latitude").setAttribute("value", lat);
+        document.getElementById("longitude").setAttribute("value", lon);
     }
 
     function createMap() {

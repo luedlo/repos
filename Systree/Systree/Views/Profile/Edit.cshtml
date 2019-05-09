@@ -39,16 +39,6 @@
                 </article>
 
                 <article class="form-group">
-                    @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <article class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.IsActive)
-                            @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
-                        </div>
-                    </article>
-                </article>
-
-                <article class="form-group">
                     <article class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Guardar" class="btn btn-success" />
                         <a href="~/Profile/Details/@Session["UserId"]" class="btn btn-warning text-white">Cancelar</a>

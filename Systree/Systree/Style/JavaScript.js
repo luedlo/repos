@@ -16,7 +16,7 @@ for (i = 0; i < close.length; i++) {
 var tips = [
     "Una de las más comunes causas de muerte de las plantas es el exceso de riego. Entonces, es importante que estés informado acerca de cuál es la cantidad de agua que necesita el tipo de planta que tienes, y cada cuánto tiempo es necesario regarla. ",
 
-    "Cuando estés de vacaciones no te olvides de tus plantas. Para sobrevivir, además de agua, las plantas necesitan luz y calor.Asegúrate de dejarlas con alguien que las pueda cuidar, o de tener algunas precauciones para que no le falte lo que precisan.",
+    "Cuando estés de vacaciones no te olvides de tus plantas. Para sobrevivir, además de agua, las plantas necesitan luz y calor. Asegúrate de dejarlas con alguien que las pueda cuidar, o de tener algunas precauciones para que no le falte lo que precisan.",
 
     "Evita comer cerca de las plantas. Es importante que los restos de comida o bebida no estén cerca de las plantas, ya que moscas y otros visitantes indeseados podrían ocupar tus plantas y arruinarlas.",
 

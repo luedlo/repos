@@ -32,7 +32,7 @@
                     <tr><td>&emsp;</td></tr>
                     <tr>
                         <td>Contraseña:&emsp;</td>
-                        <td>@Html.PasswordFor(a => a.Password, new { @class = "form-control" })</td>
+                        <td><input name="Password" type="password" class="form-control" /></td>
                         <td>@Html.ValidationMessageFor(a => a.Password)</td>
                     </tr>
                     <tr><td>&emsp;</td></tr>
@@ -44,10 +44,10 @@
             </article>
             if (@ViewBag.Message != null)
             {
-                <div class="alert alert-danger alert-dismissible fade show" id="alert">
+                <article class="alert alert-danger alert-dismissible fade show" id="alert">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <span>@ViewBag.Message</span>
-                </div>
+                </article>
             }
         }
 

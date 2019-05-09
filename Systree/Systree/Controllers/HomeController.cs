@@ -24,6 +24,25 @@ namespace Systree.Controllers
             return View();
         }
 
+        public ActionResult Signup()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Signup([Bind(Include = "UserId,UserName,Password")] UserProfile user)
+        {
+            if (ModelState.IsValid)
+            {
+                db.UserProfile.Add(user);
+                db.SaveChanges();
+                return RedirectToAction("Dashboard");
+            }
+
+            return View(user);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(UserProfile objUser)
