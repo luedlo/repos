@@ -28,6 +28,10 @@ namespace Systree.Controllers
         {
             return View();
         }
+        public ActionResult Area()
+        {
+            return View();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -55,7 +59,7 @@ namespace Systree.Controllers
                     {
                         Session["UserID"] = obj.UserId.ToString();
                         Session["UserName"] = obj.UserName.ToString();
-                        return RedirectToAction("Dashboard");
+                        return RedirectToAction("Dashboard/0");
                     }
                 }
             }
@@ -67,6 +71,9 @@ namespace Systree.Controllers
         {
             if (Session["UserID"] != null)
             {
+                string p = Request.Path;
+                string[] path = p.Split('/');
+                ViewBag.await = path[path.Length-1];
                 return View();
             }
             else
@@ -88,7 +95,7 @@ namespace Systree.Controllers
 
         public ActionResult Design()
         {
-            return View();
+            return View(db.Planta.ToList());
         }
 
         protected override void Dispose(bool disposing)

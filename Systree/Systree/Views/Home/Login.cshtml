@@ -14,34 +14,58 @@
 
         @using (Html.BeginForm("Login", "Home", FormMethod.Post))
         {
-            <article class="py-3">
-                <h2><i class="fa fa-sign-in" aria-hidden="true"></i> Iniciar Sesión</h2>
-                <hr />
-                <span class="lead">Sistema de monitoreo, control y prevención de áreas verdes.</span>
+        <article class="py-3">
+            <h2><i class="fa fa-sign-in" aria-hidden="true"></i> Iniciar Sesión</h2>
+            <hr />
+            <span class="lead">Sistema de monitoreo, control y prevención de áreas verdes.</span>
+        </article>
+
+            <article class="row container">
+                <article class="col-md-4 pl-5 pt-5">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <table>
+                        <tr>
+                            <td>Usuario: </td>
+                            <td>@Html.TextBoxFor(a => a.UserName, new { @class = "form-control" })</td>
+                            <td>@Html.ValidationMessageFor(a => a.UserName)</td>
+                        </tr>
+                        <tr><td>&emsp;</td></tr>
+                        <tr>
+                            <td>Contraseña:&emsp;</td>
+                            <td><input name="Password" type="password" class="form-control" /></td>
+                            <td>@Html.ValidationMessageFor(a => a.Password)</td>
+                        </tr>
+                        <tr><td>&emsp;</td></tr>
+                        <tr>
+                            <td></td>
+                            <td><input class="btn btn-block btn-primary" type="submit" value="Entrar" /></td>
+                        </tr>
+                    </table>
+                </article>
+
+                <article class="col-md-8">
+                    <video width="500" muted loop autoplay class="rounded shadow border border-dark" id="video">
+                        <source src="~/resources/video.mp4" />
+                    </video>
+                    <img src="~/resources/LogoTec.png" id="logoTec"/>
+                </article>
+                <style>
+                    #video {
+                        filter: blur(1.5px);
+                        float: right
+                    }
+                    #logoTec {
+                        width: 120px;
+                        position: relative;
+                        right: -540px;
+                        top: 10px;
+                        border-radius: 50%;
+                        box-shadow: 0 0 5px 5px rgba(0,0,0,0.5);
+                    }
+                </style>
             </article>
 
-            <article class="py-3">
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true)
-                <table>
-                    <tr>
-                        <td>Usuario: </td>
-                        <td>@Html.TextBoxFor(a => a.UserName, new { @class = "form-control" })</td>
-                        <td>@Html.ValidationMessageFor(a => a.UserName)</td>
-                    </tr>
-                    <tr><td>&emsp;</td></tr>
-                    <tr>
-                        <td>Contraseña:&emsp;</td>
-                        <td><input name="Password" type="password" class="form-control" /></td>
-                        <td>@Html.ValidationMessageFor(a => a.Password)</td>
-                    </tr>
-                    <tr><td>&emsp;</td></tr>
-                    <tr>
-                        <td></td>
-                        <td><input class="btn btn-block btn-primary" type="submit" value="Entrar" /></td>
-                    </tr>
-                </table>
-            </article>
             if (@ViewBag.Message != null)
             {
                 <article class="alert alert-danger alert-dismissible fade show" id="alert">

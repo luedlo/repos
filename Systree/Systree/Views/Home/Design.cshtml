@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<Systree.Models.Planta>
+
 @{
     ViewBag.Title = "Diseñador";
     ViewBag.Lat = 0;
@@ -15,7 +16,7 @@
             <hr />
         </article>
 
-        <article id="pos">
+        <article id="pos" class="py-5">
             <a onclick="showLocation()" class="btn btn-outline-info float-right">
                 <i class="fa fa-map-marker" aria-hidden="true"></i> Ver Ubicación
             </a>
@@ -34,7 +35,7 @@
                     </div>
                 </div>
 
-                <div class="container col-md-8">
+                <div class="container col-md-4">
                     <div class="form-group">
                         <label class="lead">Nombre del Área:</label>
                         <input type="text" class="form-control" placeholder="Nombre" id="title">
@@ -44,12 +45,223 @@
                         <textarea class="form-control" placeholder="Descripción" rows="3" id="desc"></textarea>
                     </div>
                 </div>
+
+                <div class="container col-md-4">
+                    <div class="form-group">
+                        <label class="lead">Largo del Terreno(m):</label>
+                        <input type="text" class="form-control" placeholder="Largo" id="width">
+                    </div>
+                    <div class="form-group">
+                        <label class="lead">Ancho del Terreno(m):</label>
+                        <input type="text" class="form-control" placeholder="Ancho" id="height">
+                    </div>
+                </div>
             </form>
 
 
         </article>
 
     </section>
+
+    <hr />
+
+    <section class="container row py-5">
+        <article class="p-2 col-md-2">
+            <article id="accordion">
+                <article class="card">
+                    <article class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button onclick="plant(3)" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <i class="fa fa-tree text-success" aria-hidden="true"></i>
+                                Árboles<br />[T]
+                            </button>
+                        </h5>
+                    </article>
+
+                    <article id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <ul class="card-body">
+                            @foreach (var item in Model)
+                            {
+                                if (item.Tipo == 1)
+                                {
+                                    <a href="##" onclick="plantNames(this.getAttribute('name'))" name="@item.Nombre">° @item.Nombre</a><br />
+                                }
+                            }
+                        </ul>
+                    </article>
+                </article>
+                <article class="card">
+                    <article class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button onclick="plant(2)" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <i class="fa fa-pagelines text-success" aria-hidden="true"></i>
+                                Arbustos<br />[B]
+                            </button>
+                        </h5>
+                    </article>
+                    <article id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <ul class="card-body">
+                            @foreach (var item in Model)
+                            {
+                                if (item.Tipo == 2)
+                                {
+                                    <a href="##" onclick="plantNames(this.getAttribute('name'))" name="@item.Nombre">° @item.Nombre</a><br />
+                                }
+                            }
+                        </ul>
+                    </article>
+                </article>
+                <article class="card">
+                    <article class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <button onclick="plant(1)" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <i class="fa fa-leaf text-success" aria-hidden="true"></i>
+                                Flores<br />[F]
+                            </button>
+                        </h5>
+                    </article>
+                    <article id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                        <ul class="card-body">
+                            @foreach (var item in Model)
+                            {
+                                if (item.Tipo == 3)
+                                {
+                                    <a href="##" onclick="plantNames(this.getAttribute('name'))" name="@item.Nombre">° @item.Nombre</a><br />
+                                }
+                            }
+                        </ul>
+                    </article>
+                </article>
+            </article>
+        </article>
+
+        <article class="p-2 col-md-7">
+            <canvas id="myCanvas" style="border:1px solid black;" width="600" height="400"></canvas>
+        </article>
+
+        <article class="p-2 col-md-3">
+            <label>Listado de Plantas:</label>
+            <select multiple disabled class="form-control h-75" id="plantList">
+            </select>
+        </article>
+
+        <article class="p-5 mx-auto">
+            <a href="~/Home/Dashboard/0" class="btn btn-warning text-white">Cancelar</a>
+            <a class="btn btn-success text-white" onclick="ok()" id="ok">Finalizar</a>
+        </article>
+    </section>
+
+    <script>
+        var width = 50;
+        var height = 50;
+        var canvasWidth = 600;
+        var canvasHeight = 400;
+        var plantsArray = [];
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+
+        // Select a plant
+        var plantType = 3;
+        var plantStroke = 3;
+        var plantName = "T";
+        var plantCompleteName = "";
+        var plantCount = 0;
+        function plant(type) {
+            plantType = plantStroke = type;
+        }
+
+        function ok() {
+            window.location.href = "Dashboard/" + plantCount;
+        }
+
+        // Lines
+        for (var i = 0; i < canvasWidth; i += width) {
+            ctx.fillStyle = "dark";
+            ctx.beginPath();
+            ctx.moveTo(i, 0);
+            ctx.lineTo(i, canvasHeight);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(0, i);
+            ctx.lineTo(canvasWidth, i);
+            ctx.stroke();
+        }
+
+        // Determines position of the click on canvas
+        canvas.addEventListener("click", getCursorPosition);
+        function getCursorPosition(event) {
+            var rect = canvas.getBoundingClientRect();
+            var x = event.clientX - rect.left;
+            var y = event.clientY - rect.top;
+            drawPlant(x, y);
+        }
+
+        // Draw plant position on canvas
+        function drawPlant(x, y) {
+            switch (plantType) {
+                case 1: ctx.fillStyle = "#C0392B";
+                    plantName = "F";
+                    break;
+                case 2: ctx.fillStyle = "#27AE60";
+                    plantName = "B";
+                    break;
+                case 3: ctx.fillStyle = "#2C3E50";
+                    plantName = "T";
+                    break;
+            }
+
+            x = Math.floor(x / width) * width;
+            y = Math.floor(y / height) * height;
+            var w = width * plantStroke;
+            var h = height * plantStroke;
+
+            if (((x + w) > canvasWidth) && ((y + h) > canvasHeight)) {
+                alert("Out of Range: width & height");
+            }
+            else if ((x + w) > canvasWidth) {
+                alert("Out of Range: width");
+            }
+            else if ((y + h) > canvasHeight) {
+                alert("Out of Range: height");
+            }
+            else {
+                //if (!isOverlapping(x,y,w,h)) {
+                ctx.fillRect(x, y, w, h);
+                ctx.font = "15px Arial";
+                ctx.fillStyle = "#fff";
+                ctx.fillText(plantCount++, x + 22, y + 30);
+                ctx.font = "20px Arial";
+                ctx.fillText(plantName, x + 10, y + 30);
+                ctx.strokeStyle = "#fff";
+                ctx.strokeRect(x, y, w, h);
+                plantsArray.push(x + "," + y + "," + w + "," + h);
+                document.getElementById("plantList").innerHTML += "<option>" + plantCount + ".- " + plantCompleteName + "</option>";
+                //}
+                //else {
+                //  alert("Plants are overlapping!");
+                //}
+            }
+        }
+
+        // Check if is possible put a plant
+        function isOverlapping(x, y, w, h) {
+            for (var i = 0; i < plantsArray.length; i++) {
+                var arrayCoords = plantsArray[i].split(",");
+                var xOther = Number(arrayCoords[0]);
+                var yOther = Number(arrayCoords[1]);
+                var wOther = Number(arrayCoords[2]);
+                var hOther = Number(arrayCoords[3]);
+
+                if (x < wOther) {
+                    return true;
+                }
+            }
+    }
+
+        function plantNames(name) {
+            plantCompleteName = name;
+        }
+    </script>
 }
 
 else
@@ -106,7 +318,7 @@ else
         position: fixed;
     }
 
-    
+
     #deleteBtn {
         right: 10px;
         top: 60px;
@@ -114,7 +326,7 @@ else
         z-index: 1000;
         position: fixed;
     }
-    
+
     #closeBtn {
         right: 10px;
         top: 100px;
@@ -130,7 +342,7 @@ else
     var map, lat, lon, greenIcon;
     document.getElementById("map").style.display = "none";
     document.getElementById("deleteBtn").style.display = "none";
-    
+
     /** Location **/
     function showLocation() {
         locations();
